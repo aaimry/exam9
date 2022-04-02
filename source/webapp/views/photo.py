@@ -23,7 +23,7 @@ class IndexView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.filter(Q(is_private=False))
+        queryset = queryset.filter(Q(is_private=False)).exclude(album__is_private=True)
         return queryset
 
 
