@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.views.generic import (
     CreateView,
     DetailView,
     UpdateView,
-    DeleteView
+    DeleteView, ListView
 )
 from django.urls import reverse, reverse_lazy
 
@@ -12,7 +13,7 @@ from webapp.models import Photo, Album
 from webapp.forms import AlbumForm
 
 
-class AlbumView(DetailView):
+class AlbumView(LoginRequiredMixin, DetailView):
     model = Album
     template_name = 'albums/view.html'
 
@@ -21,6 +22,17 @@ class AlbumView(DetailView):
         context['photos'] = Photo.objects.filter(album=self.object).exclude(is_private=True)
         context['is_author'] = self.object.author == self.request.user
         return context
+
+
+class AlbumListView(ListView):
+    model = Album
+    context_object_name = "albums"
+    template_name = 'partial/album_list.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(Q(is_private=False))
+        return queryset
 
 
 class CreateAlbumView(LoginRequiredMixin, CreateView):
@@ -37,7 +49,7 @@ class CreateAlbumView(LoginRequiredMixin, CreateView):
         return self.get_success_url()
 
     def get_success_url(self):
-        return redirect('webapp:album-view', pk=self.album.id)
+        return redirect('webapp:view_album', pk=self.album.id)
 
 
 class AlbumUpdateView(PermissionRequiredMixin, UpdateView):

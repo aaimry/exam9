@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block nav %}
-    {#{% if user.is_authenticated and perms.gallery.change_photo or is_author %}#}
-    <li class="nav-item">
-        <a class="nav-link text-light" href="{% url "webapp:update_photo" photo.id %}">Update</a>
-    </li>
-    {#{% endif %}#}
-    {#{% if user.is_authenticated and perms.gallery.delete_photo or is_author %}#}
-    <li class="nav-item">
-        <a class="nav-link text-light" href="{% url "webapp:delete_photo" photo.id %}">Delete</a>
-    </li>
-    {#{% endif %}#}
+    {% if user.is_authenticated and perms.webapp.change_photo or is_author %}
+        <li class="nav-item">
+            <a class="nav-link text-light" href="{% url "webapp:update_photo" photo.id %}">Изменить</a>
+        </li>
+    {% endif %}
+    {% if user.is_authenticated and perms.webapp.delete_photo or is_author %}
+        <li class="nav-item">
+            <a class="nav-link text-light" href="{% url "webapp:delete_photo" photo.id %}">Удалить</a>
+        </li>
+    {% endif %}
 
 {% endblock nav %}
 {% block content %}
@@ -19,7 +19,18 @@
             <h3>Автор:{{ photo.author }}</h3>
             {% if photo.album %}
                 <br>
-                <a href="{% url 'webapp:view_album' photo.album.id %}">Альбом:{{ photo.album }}</a>
+                <a style="text-decoration: none"
+                   href="{% url 'webapp:view_album' photo.album.id %}">Альбом:{{ photo.album }}</a>
+            {% endif %}
+            {% if  is_author %}
+                {% if photo.link %}
+                    <a class=" btn btn-primary w-25" href="{% url 'webapp:get_photo_by_link' photo.link %}">
+                        Перейти
+                        по ссылке</a>
+                {% else %}
+                    <a class="btn btn-outline-primary w-25" href="{% url 'webapp:generate_link' photo.id %}">Сгенерировать
+                        ссылку</a>
+                {% endif %}
             {% endif %}
             <p class="card-text"><small class="text-muted">{{ photo.create_date }}</small></p>
             <img class='rounded img' style="height: 550px; width: 850px" src="{{ photo.photo.url }}">
