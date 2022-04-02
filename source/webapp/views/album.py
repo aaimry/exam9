@@ -1,8 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.db.models import Q
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.views.generic import (
-    ListView,
     CreateView,
     DetailView,
     UpdateView,
@@ -16,20 +14,20 @@ from webapp.forms import AlbumForm
 
 class AlbumView(DetailView):
     model = Album
-    template_name = 'album/view.html'
+    template_name = 'albums/view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['photos'] = Gallery.objects.filter(album=self.object).exclude(is_private=True)
+        context['photos'] = Photo.objects.filter(album=self.object).exclude(is_private=True)
         context['is_author'] = self.object.author == self.request.user
         return context
 
 
 class CreateAlbumView(LoginRequiredMixin, CreateView):
-    template_name = 'album/create.html'
+    template_name = 'albums/create.html'
     form_class = AlbumForm
     model = Album
-    success_url = reverse_lazy('gallery:photo-list')
+    success_url = reverse_lazy('webapp:index_photo')
 
     def form_valid(self, form):
         self.album = form.save(commit=False)
@@ -45,7 +43,7 @@ class CreateAlbumView(LoginRequiredMixin, CreateView):
 class AlbumUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = AlbumForm
     model = Album
-    template_name = 'album/update.html'
+    template_name = 'albums/update.html'
     context_object_name = 'album'
     permission_required = 'webapp.change_album'
 
@@ -53,15 +51,15 @@ class AlbumUpdateView(PermissionRequiredMixin, UpdateView):
         return self.get_object().author == self.request.user or super().has_permission()
 
     def get_success_url(self):
-        return reverse('webapp:album-view', kwargs={'pk': self.kwargs.get('pk')})
+        return reverse('webapp:view_album', kwargs={'pk': self.kwargs.get('pk')})
 
 
 class AlbumDeleteView(PermissionRequiredMixin, DeleteView):
     model = Album
-    template_name = 'album/delete.html'
+    template_name = 'albums/delete.html'
     context_object_name = 'object'
     permission_required = "webapp.delete_album"
-    success_url = reverse_lazy('webapp:photo-list')
+    success_url = reverse_lazy('webapp:index_photo')
 
     def has_permission(self):
         return self.get_object().author == self.request.user or super().has_permission()
