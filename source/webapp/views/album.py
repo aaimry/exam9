@@ -24,7 +24,7 @@ class AlbumView(LoginRequiredMixin, DetailView):
         return context
 
 
-class AlbumListView(ListView):
+class AlbumListView(LoginRequiredMixin, ListView):
     model = Album
     context_object_name = "albums"
     template_name = 'partial/album_list.html'

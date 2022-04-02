@@ -23,13 +23,13 @@
         {% include 'partial/photo_list.html' %}
         <h2 class="text-center clear">Альбомы автора:</h2>
         {% include 'partial/album_list.html' %}
-        <h2 class="text-center clear">Избранные photo:</h2>
-{#        {% include 'partial/photo_list.html'  with photos=fav_photos %}#}
-{#        <h2 class="text-center clear">Избранные albums:</h2>#}
-{#        {% include 'partial/album_list.html'  with albums=fav_albums %}#}
-        <h2 class="text-center clear">Private photo:</h2>
+        <h2 class="text-center clear">Избранные фото:</h2>
+        {% include 'partial/photo_list.html'  with photos=fav_photos %}
+        <h2 class="text-center clear">Избранные альбомы:</h2>
+        {% include 'partial/album_list.html'  with albums=fav_albums %}
+        <h2 class="text-center clear">Приватные фото:</h2>
         {% include 'partial/photo_list.html'  with photos=private_photos %}
-        <h2 class="text-center clear">Private albums:</h2>
+        <h2 class="text-center clear">Приватные альбомы:</h2>
         {% include 'partial/album_list.html'  with albums=private_albums %}
     </div>
 {% endblock %}

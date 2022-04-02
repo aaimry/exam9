@@ -11,8 +11,13 @@
                     <a href="{% url "webapp:view_photo" photo.id %}" type="button" class="btn btn-outline-primary">
                         Детальный просмотр</a>
                     <hr>
-                    <a class="btn btn-outline-success" href="#"><i class="bi bi-bookmark"></i> Добавить в Избранное</a>
-
+                    <a class="like" style="text-decoration: none" data-btnToHide="unlike"
+                            {% if user in photo.fav.all %} hidden {% endif %}
+                       href="{% url 'api:photo_fav' photo.pk %} "><i class="bi bi-bookmark"></i>Добавить в Избранное</a>
+                    <a class="unlike" style="text-decoration: none" data-btnToHide="like"
+                            {% if user not in photo.fav.all %} hidden {% endif %}
+                       href="{% url 'api:photo_unfav' photo.pk %}"><i class="bi bi-bookmark-fill"></i>Удалить из
+                        Избранного</a>
                 </div>
             </div>
         {% endfor %}
