@@ -8,6 +8,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from accounts.forms import MyUserCreationForm, UserUpdateForm, ProfileUpdateForm, PasswordChangeForm
 
 from accounts.models import Profile
+from webapp.models import Photo, Album
 
 
 class RegisterView(CreateView):
@@ -59,11 +60,16 @@ class UserProfileView(DetailView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     reviews = Review.objects.all()
-    #     context['reviews'] = reviews
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['photos'] = Photo.objects.filter(author=self.object).exclude(is_private=True)
+        context['albums'] = Album.objects.filter(author=self.object).exclude(is_private=True)
+        # context['fav_photos'] = self.object.favorite_photos.all().filter(is_private=False)
+        # context['fav_albums'] = Album.objects.filter(favorite=self.object).exclude(is_private=True)
+        if self.object == self.request.user:
+            context['private_photos'] = Photo.objects.filter(author=self.object).filter(is_private=True)
+            context['private_albums'] = Album.objects.filter(author=self.object).filter(is_private=True)
+        return context
 
 
 class UpdateUserView(LoginRequiredMixin, UpdateView):

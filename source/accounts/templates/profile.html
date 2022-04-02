@@ -17,10 +17,19 @@
                  alt="user avatar">
         {% endif %}
         <p><strong>Username:</strong>{{ user_object.username }}</p>
-        <p><strong>First name:</strong>{% if user_object.first_name %}{{ user_object.first_name }}{% else %}
-            Отсутсвует{% endif %}</p>
-        <p><strong>Last name:</strong>{% if user_object.last_name %}{{ user_object.last_name }}{% else %}
-            Отсутсвует{% endif %}</p>
-        <p><strong>Email:</strong>{% if user_object.email %}{{ user_object.email }}{% else %}Отсутствует{% endif %}</p>
+    </div>
+    <div class="container">
+        <h2 class="text-center clear">Фотографии автора:</h2>
+        {% include 'partial/photo_list.html' %}
+        <h2 class="text-center clear">Альбомы автора:</h2>
+        {% include 'partial/album_list.html' %}
+        <h2 class="text-center clear">Избранные photo:</h2>
+{#        {% include 'partial/photo_list.html'  with photos=fav_photos %}#}
+{#        <h2 class="text-center clear">Избранные albums:</h2>#}
+{#        {% include 'partial/album_list.html'  with albums=fav_albums %}#}
+        <h2 class="text-center clear">Private photo:</h2>
+        {% include 'partial/photo_list.html'  with photos=private_photos %}
+        <h2 class="text-center clear">Private albums:</h2>
+        {% include 'partial/album_list.html'  with albums=private_albums %}
     </div>
 {% endblock %}
