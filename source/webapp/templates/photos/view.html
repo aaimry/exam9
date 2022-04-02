@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block nav %}
+    {#{% if user.is_authenticated and perms.gallery.change_photo or is_author %}#}
+    <li class="nav-item">
+        <a class="nav-link text-light" href="{% url "webapp:update_photo" photo.id %}">Update</a>
+    </li>
+    {#{% endif %}#}
+    {#{% if user.is_authenticated and perms.gallery.delete_photo or is_author %}#}
+    <li class="nav-item">
+        <a class="nav-link text-light" href="{% url "webapp:delete_photo" photo.id %}">Delete</a>
+    </li>
+    {#{% endif %}#}
+
+{% endblock nav %}
+{% block content %}
+    <div class="card m-3 p-3">
+        <div class="row">
+            <h3>{{ photo.description }}</h3>
+            <h3>Автор:{{ photo.author }}</h3>
+            {% if photo.album %}
+                <br>
+                <a href="{% url 'webapp:view_album' photo.album.id %}">Альбом:{{ photo.album }}</a>
+            {% endif %}
+            <p class="card-text"><small class="text-muted">{{ photo.create_date }}</small></p>
+            <img class='rounded img' style="height: 550px; width: 850px" src="{{ photo.photo.url }}">
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% csrf_token %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container text-center">
+            <h2>Вы хотите удалить oбъект '{{ object }}'?</h2>
+            <input class="btn btn-danger" type="submit" value="Да">
+            <a class="btn btn-primary" href="{% url 'webapp:view_photo' object.pk %}">Нет</a>
+        </div>
+    </form>
+{% endblock %}
