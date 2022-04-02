@@ -4,4 +4,3 @@ venv/
 __pycache__/
 .vscode/
 /source/db.sqlite3
-/source/uploads/
