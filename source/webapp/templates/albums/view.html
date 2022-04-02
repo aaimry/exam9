@@ -13,17 +13,20 @@
     {% endif %}
 {% endblock nav %}
 {% block content %}
-    <div class="row">
+    <div class="container">
         <h1>{{ object.title }}</h1>
         <p>{{ object.description }}</p>
-        <p class="card-text"><small class="text-muted">{{ album.create_date }}</small></p>
-        <a class="like" style="text-decoration: none" data-btnToHide="unlike"
-                {% if user in album.fav.all %} hidden {% endif %}
-           href="{% url 'api:album_fav' album.pk %} "><i class="bi bi-bookmark"></i>Добавить в Избранное</a>
-        <a class="unlike" style="text-decoration: none" data-btnToHide="like"
-                {% if user not in album.fav.all %} hidden {% endif %}
-           href="{% url 'api:album_unfav' album.pk %}"><i class="bi bi-bookmark-fill"></i>Удалить из
-            Избранного</a>
-        {% include "partial/photo_list.html" %}
+        <p>{{ album.author }}</p>
+        <p class="card-text"><small class="text-muted">{{ object.create_date }}</small></p>
+        {% if user.is_authenticated %}
+            <a class="like" style="text-decoration: none" data-btnToHide="unlike"
+                    {% if user in album.fav.all %} hidden {% endif %}
+               href="{% url 'api:album_fav' album.pk %} "><i class="bi bi-bookmark"></i>Добавить в Избранное</a>
+            <a class="unlike" style="text-decoration: none" data-btnToHide="like"
+                    {% if user not in album.fav.all %} hidden {% endif %}
+               href="{% url 'api:album_unfav' album.pk %}"><i class="bi bi-bookmark-fill"></i>Удалить из
+                Избранного</a>
+        {% endif %}
     </div>
+    {% include "partial/photo_list.html" %}
 {% endblock content %}

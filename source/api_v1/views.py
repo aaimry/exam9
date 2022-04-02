@@ -34,7 +34,7 @@ class AlbumFavView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user = request.user
         album = get_object_or_404(Album, id=kwargs.get('pk'))
-        user_fav = user.photo_fav.all()
+        user_fav = user.album_fav.all()
         if user_fav.filter(album=album).count() > 0:
             return HttpResponseForbidden('Вы уже постаивли лайк :)')
         else:
@@ -46,7 +46,7 @@ class AlbumUnFavView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user = request.user
         album = get_object_or_404(Album, id=kwargs.get('pk'))
-        user_fav = user.photo_fav.all()
+        user_fav = user.album_fav.all()
         if user_fav.filter(album=album).count() > 0:
             AlbumFav.objects.get(user=user, album=album).delete()
         else:

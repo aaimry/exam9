@@ -65,7 +65,7 @@ class UserProfileView(DetailView):
         context['photos'] = Photo.objects.filter(author=self.object).exclude(is_private=True)
         context['albums'] = Album.objects.filter(author=self.object).exclude(is_private=True)
         context['fav_photos'] = self.object.photo_fav.all()
-        context['fav_albums'] = self.object.photo_fav.all()
+        context['fav_albums'] = self.object.album_fav.all()
         if self.object == self.request.user:
             context['private_photos'] = Photo.objects.filter(author=self.object).filter(is_private=True)
             context['private_albums'] = Album.objects.filter(author=self.object).filter(is_private=True)

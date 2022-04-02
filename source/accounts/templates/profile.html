@@ -24,9 +24,9 @@
         <h2 class="text-center clear">Альбомы автора:</h2>
         {% include 'partial/album_list.html' %}
         <h2 class="text-center clear">Избранные фото:</h2>
-        {% include 'partial/photo_list.html'  with photos=fav_photos %}
+        {% include 'partial/photo_list.html'  with photo=fav_photos %}
         <h2 class="text-center clear">Избранные альбомы:</h2>
-        {% include 'partial/album_list.html'  with albums=fav_albums %}
+        {% include 'partial/album_list.html'  with album=fav_albums %}
         <h2 class="text-center clear">Приватные фото:</h2>
         {% include 'partial/photo_list.html'  with photos=private_photos %}
         <h2 class="text-center clear">Приватные альбомы:</h2>
