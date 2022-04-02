@@ -8,7 +8,9 @@ from .views import (IndexView,
                     AlbumView,
                     CreateAlbumView,
                     AlbumUpdateView,
-                    AlbumDeleteView)
+                    AlbumDeleteView,
+                    GetPhotoByLink,
+                    GenerateLink)
 
 app_name = 'webapp'
 
@@ -22,5 +24,6 @@ urlpatterns = [
     path('album/add', CreateAlbumView.as_view(), name='create_album'),
     path('album/update/<int:pk>/', AlbumUpdateView.as_view(), name='update_album'),
     path('album/delete/<int:pk>/', AlbumDeleteView.as_view(), name='delete_album'),
+    path('<int:pk>/get_uuid', GenerateLink.as_view(), name='generate_link'),
+    path('token/<uuid>', GetPhotoByLink.as_view(), name='get_photo_by_link'),
 ]
-

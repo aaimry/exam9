@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404, render
 from django.views.generic import (
     ListView,
@@ -12,7 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.db.models import Q
 from django.views import View
 import uuid
-from webapp.models import Photo, Album
+from webapp.models import Photo, UuidLink
 from webapp.forms import PhotoForm
 
 
@@ -89,3 +88,21 @@ class PhotoDeleteView(PermissionRequiredMixin, DeleteView):
 
     def has_permission(self):
         return self.get_object().author == self.request.user or super().has_permission()
+
+
+class GetPhotoByLink(View):
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        uuid = kwargs.get('uuid')
+        photo = Photo.objects.get(link__link=uuid)
+        context['photo'] = photo
+        return render(request, 'photos/view.html', context=context)
+
+
+class GenerateLink(View):
+
+    def get(self, request, *args, **kwargs):
+        photo = get_object_or_404(Photo, id=kwargs.get('pk'))
+        link = UuidLink.objects.create(photo=photo, link=str(uuid.uuid4()))
+        return redirect('webapp:view_photo', pk=photo.id)
