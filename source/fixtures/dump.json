@@ -1,0 +1,168 @@
+[
+{
+    "model": "webapp.photo",
+    "pk": 8,
+    "fields": {
+        "photo": "photos/735688270c31ba0605355a6d8b093c39_3hHYsdL.jpg",
+        "description": "eto gory",
+        "create_date": "2022-04-02T12:12:21.813Z",
+        "author": 2,
+        "is_private": false,
+        "album": null
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 10,
+    "fields": {
+        "photo": "photos/photo_2022-04-02_11-56-29.jpg",
+        "description": "картошечка фри",
+        "create_date": "2022-04-02T12:20:01.509Z",
+        "author": 2,
+        "is_private": false,
+        "album": null
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 11,
+    "fields": {
+        "photo": "photos/photo_2022-04-02_11-55-33.jpg",
+        "description": "-_-",
+        "create_date": "2022-04-02T12:20:24.130Z",
+        "author": 2,
+        "is_private": false,
+        "album": 1
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 13,
+    "fields": {
+        "photo": "photos/photo_2022-04-02_11-52-53.jpg",
+        "description": "икскюзми",
+        "create_date": "2022-04-02T12:22:42.860Z",
+        "author": 2,
+        "is_private": false,
+        "album": 2
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 14,
+    "fields": {
+        "photo": "photos/photo_2022-04-02_11-58-15.jpg",
+        "description": "moi lubimyi tweet",
+        "create_date": "2022-04-02T12:23:15.225Z",
+        "author": 2,
+        "is_private": false,
+        "album": null
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 15,
+    "fields": {
+        "photo": "photos/song-kol-lake-with-kyrgyz.jpg",
+        "description": "son-kol",
+        "create_date": "2022-04-02T12:27:23.066Z",
+        "author": 3,
+        "is_private": false,
+        "album": null
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 16,
+    "fields": {
+        "photo": "photos/photo_2022-04-02_11-56-38.jpg",
+        "description": "☺️",
+        "create_date": "2022-04-02T12:28:21.786Z",
+        "author": 3,
+        "is_private": false,
+        "album": null
+    }
+},
+{
+    "model": "webapp.photo",
+    "pk": 18,
+    "fields": {
+        "photo": "photos/9d136f6fd145801943361a0739f027a4.jpg",
+        "description": "желаю вам хорошего настроения!",
+        "create_date": "2022-04-02T13:40:37.644Z",
+        "author": 2,
+        "is_private": false,
+        "album": null
+    }
+},
+{
+    "model": "webapp.album",
+    "pk": 1,
+    "fields": {
+        "title": "moi vsratye memy",
+        "description": "",
+        "author": 2,
+        "create_date": "2022-04-02T12:13:23.042Z",
+        "is_private": false
+    }
+},
+{
+    "model": "webapp.album",
+    "pk": 2,
+    "fields": {
+        "title": "тупые,но очень смешные мемы",
+        "description": "",
+        "author": 2,
+        "create_date": "2022-04-02T12:22:24.341Z",
+        "is_private": true
+    }
+},
+{
+    "model": "webapp.photofav",
+    "pk": 17,
+    "fields": {
+        "user": 2,
+        "photo": 11
+    }
+},
+{
+    "model": "webapp.photofav",
+    "pk": 18,
+    "fields": {
+        "user": 2,
+        "photo": 10
+    }
+},
+{
+    "model": "webapp.photofav",
+    "pk": 20,
+    "fields": {
+        "user": 2,
+        "photo": 13
+    }
+},
+{
+    "model": "webapp.photofav",
+    "pk": 21,
+    "fields": {
+        "user": 3,
+        "photo": 13
+    }
+},
+{
+    "model": "webapp.photofav",
+    "pk": 22,
+    "fields": {
+        "user": 3,
+        "photo": 16
+    }
+},
+{
+    "model": "webapp.albumfav",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "album": 1
+    }
+}
+]
