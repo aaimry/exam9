@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row justify-content-between">
+        {% for photo in photos %}
+            <div class="card m-3 p-3" style="width: 25rem;">
+                <div class="card-body text-center">
+                    <img class='rounded img' style="height: 150px; width: 200px;" src="{{ photo.photo.url }}"
+                         alt="...">
+                    <h5>{{ photo.description }}</h5>
+                    <h5>Автор:{{ photo.author }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ photo.create_date }}</small></p>
+                    <a href="{% url "webapp:view_photo" photo.id %}" type="button" class="btn btn-outline-primary">
+                        Детальный просмотр</a>
+                    <hr>
+                    <a class="btn btn-outline-success" href="#"><i class="bi bi-bookmark"></i> Добавить в Избранное</a>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

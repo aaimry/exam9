@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Album {% endblock title %}
+{% block nav %}
+    {% if user.is_authenticated and perms.webapp.change_album or is_author %}
+        <li class="nav-item">
+            <a class="nav-link text-light" href="{% url "webapp:update_album" object.id %}">Update</a>
+        </li>
+    {% endif %}
+    {% if user.is_authenticated and perms.webapp.delete_album or is_author %}
+        <li class="nav-item">
+            <a class="nav-link text-light" href="{% url "webapp:delete_album" object.id %}">Delete</a>
+        </li>
+    {% endif %}
+{% endblock nav %}
+{% block content %}
+    <div class="row">
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.description }}</p>
+        <p class="card-text"><small class="text-muted">{{ album.create_date }}</small></p>
+        {% include "partial/photo_list.html" %}
+    </div>
+{% endblock content %}
